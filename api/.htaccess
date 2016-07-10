@@ -1,0 +1,10 @@
+#RewriteRules
+    RewriteRule ^$ index.php [L]
+
+    #Plugins
+        RewriteRule ^plugins$ _plugins/plugins.php?list [L]
+        RewriteRule ^plugin/(\w)+$ _plugins/plugins.php?id=$1 [L]
+
+    #Themes
+        RewriteRule ^themes$ _themes/themes.php?list [L]
+        RewriteRule ^theme/(\w)+$ _themes/themes.php?id=$1 [L]
