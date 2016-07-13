@@ -33,7 +33,7 @@
 			}
 
 			$return = [
-				"code" => $error,
+				"code" => filter_var($error, FILTER_VALIDATE_INT),
 				"message" => $mess,
 			];
 

@@ -4,9 +4,11 @@
 	 * zest-writer-site Copyright© 2016 Kevin Vuilleumier
 	 */
 
-	$return = [];
+	require_once __DIR__.'/../../config.php';
 
+	$return = [];
 	if(isset($_GET['list'])){
+		//Get list of all plugins
 		$result = $apiDatabase->get('SELECT * FROM plugins WHERE removed = 0', []);
 
 		while($data = $result->fetch()){
@@ -18,19 +20,22 @@
 				'description' => $data['description'],
 				'version' => $data['version'],
 				'downloads' => filter_var($data['downloads'], FILTER_VALIDATE_INT),
-				'url' => $data['url_id'],
+				'url_id' => $data['url_id'],
+				'url' => PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/'.$data['url_id'],
 			];
 		}
 
-		$return = empty($return) ? ['message' => 'No plugins founded'] : $return;
+		ShowApi::show(empty($return) ? ['message' => 'No plugins founded'] : $return);
 	}else{
 		//Get one specific _plugins
-
 		if(isset($_GET['id']) && !empty($_GET['id'])){
-			$return = ['debug' => 'id'];
+			$plugin = $apiDatabase->getPlugin($_GET['id']);
+
+			if(!$plugin)
+				ApiError::error(404);
+
+			ShowApi::show($plugin->getArray());
 		}else{
-			ApiError::error(404);
+			ApiError::error(400);
 		}
 	}
-
-	echo json_encode($return);

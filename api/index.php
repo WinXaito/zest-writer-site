@@ -18,6 +18,8 @@
 				'detail_post' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'plugin/{ID}',
 				'detail_put' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'plugin/{ID}',
 				'detail_delete' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'plugin/{ID}',
+				'download' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'plugin/download/{ID}.content',
+				'download_data' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'plugin/download/{ID}.data',
 			],
 			'themes' => [
 				'list_get' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'themes',
@@ -25,6 +27,8 @@
 				'detail_post' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/{ID}',
 				'detail_put' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/{ID}',
 				'detail_delete' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/{ID}',
+				'download' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/download/{ID}.content',
+				'download_data' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/download/{ID}.data',
 			],
 		]
 	];

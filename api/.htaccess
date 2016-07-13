@@ -1,10 +1,26 @@
+#RewriteEngine
+    RewriteEngine on
+
 #RewriteRules
     RewriteRule ^$ index.php [L]
 
     #Plugins
         RewriteRule ^plugins$ _plugins/plugins.php?list [L]
-        RewriteRule ^plugin/(\w)+$ _plugins/plugins.php?id=$1 [L]
+        RewriteRule ^plugin/(\w+)$ _plugins/plugins.php?id=$1 [L]
+
+        RewriteRule ^plugin/download/(\w+).content _plugins/downloads.php?id=$1&type=content [L]
+        RewriteRule ^plugin/download/(\w+).data$ _plugins/downloads.php?id=$1&type=data [L]
+        RewriteRule ^plugin/download/(\w+)$ _plugins/downloads.php?id=$1&type=content [L]
 
     #Themes
         RewriteRule ^themes$ _themes/themes.php?list [L]
-        RewriteRule ^theme/(\w)+$ _themes/themes.php?id=$1 [L]
+        RewriteRule ^theme/(\w+)$ _themes/themes.php?id=$1 [L]
+
+        RewriteRule ^theme/download/(\w+)$ _themes/downloads.php?id=$1 [L]
+
+#ErrorDocument
+    ErrorDocument 400 /api/error/error.php?e=400
+    ErrorDocument 401 /api/error/error.php?e=401
+    ErrorDocument 403 /api/error/error.php?e=403
+    ErrorDocument 404 /api/error/error.php?e=404
+    ErrorDocument 500 /api/error/error.php?e=500
