@@ -22,6 +22,18 @@
 		public function __construct(){
 		}
 
+		/**
+		 * @param $id
+		 * @param $name
+		 * @param $password
+		 * @param $email
+		 * @param $firstName
+		 * @param $lastName
+		 * @param $registrationDate
+		 * @param $registrationIp
+		 * @param $connectionDate
+		 * @param $connectionIp
+		 */
 		public function setUser($id, $name, $password, $email, $firstName, $lastName, $registrationDate, $registrationIp, $connectionDate, $connectionIp){
 			$this->id = $id;
 			$this->name = $name;
@@ -35,6 +47,9 @@
 			$this->connectionIp = $connectionIp;
 		}
 
+		/**
+		 * @param $array
+		 */
 		public function setUserArray($array){
 			$this->setUser(
 				$array['id'],
@@ -48,6 +63,24 @@
 				$array['connectionDate'],
 				$array['connectionIp']
 			);
+		}
+
+		/**
+		 * @return array
+		 */
+		public function getArray(){
+			return [
+				'id' => $this->id,
+				'name' => $this->name,
+				'password' => $this->password,
+				'email' => $this->email,
+				'firstName' => $this->firstName,
+				'lastName' => $this->lastName,
+				'registrationDate' => $this->registrationDate,
+				'registrationIp' => $this->registrationIp,
+				'connectionDate' => $this->connectionDate,
+				'connectionIp' => $this->connectionIp
+			];
 		}
 
 		/**

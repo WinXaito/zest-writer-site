@@ -5,6 +5,9 @@
 	 */
 
 	class ApiError{
+		/**
+		 * @param $error
+		 */
 		public static function error($error){
 			switch($error){
 				case 301:

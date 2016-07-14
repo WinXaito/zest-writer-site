@@ -12,10 +12,19 @@
 	class ApiDatabase{
 		private $db;
 
+		/**
+		 * @param Database $db
+		 */
 		public function __construct(Database $db){
 			$this->db = $db->getDatabase();
 		}
 
+		/**
+		 * @param       $query
+		 * @param array $data
+		 *
+		 * @return PDOStatement
+		 */
 		public function get($query, array $data){
 			$req = $this->db->prepare($query);
 			$req->execute($data);
@@ -23,42 +32,45 @@
 			return $req;
 		}
 
+		/**
+		 * @param $id
+		 *
+		 * @return bool|User
+		 */
 		public function getUser($id){
 			$req = $this->get("SELECT * FROM users WHERE id = ?", [$id]);
-			$result = $req->fetch();
+			$userData = $req->fetch();
 
-			if(!$result)
+			if(!$userData)
 				return false;
 
 			$user = new User();
-			$user->setUserArray($result);
+			$user->setUserArray($userData);
 
 			return $user;
 		}
 
+		/**
+		 * @param $url_id
+		 *
+		 * @return bool|Plugin
+		 */
 		public function getPlugin($url_id){
 			$req = $this->get("SELECT * FROM plugins WHERE url_id = ?", [$url_id]);
-			$result = $req->fetch();
+			$pluginData = $req->fetch();
 
-			if(!$result)
+			if(!$pluginData)
 				return false;
 
 			$plugin = new Plugin();
-			$plugin->setPlugin(
-				$result['id'],
-				$result['user'],
-				$result['official'],
-				$result['validate'],
-				$result['name'],
-				$result['url_id'],
-				$result['description'],
-				$result['version'],
-				$result['downloads'],
-				$result['removed']
-			);
+			$plugin->setPluginArray($pluginData);
 			return $plugin;
 		}
 
+		/**
+		 * @param $table
+		 * @param $id
+		 */
 		public function increaseDownload($table, $id){
 			$req = $this->get("UPDATE $table SET downloads = downloads + 1 WHERE id = ?", [$id]);
 

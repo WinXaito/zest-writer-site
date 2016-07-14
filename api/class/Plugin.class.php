@@ -1,5 +1,4 @@
 <?php
-	
 	/**
 	 * Project: Zest-Writer-Site
 	 * zest-writer-site Copyright© 2016 Kevin Vuilleumier
@@ -54,6 +53,9 @@
 			$this->download_url = PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/download/'.$this->url_id;
 		}
 
+		/**
+		 * @param $array
+		 */
 		public function setPluginArray($array){
 			$this->setPlugin(
 				$array['id'],
@@ -69,6 +71,9 @@
 			);
 		}
 
+		/**
+		 * @return array
+		 */
 		public function getArray(){
 			return [
 				'id' => filter_var($this->id, FILTER_VALIDATE_INT),
