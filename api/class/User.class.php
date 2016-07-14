@@ -87,7 +87,7 @@
 		 * @return mixed
 		 */
 		public function getId(){
-			return $this->id;
+			return filter_var($this->id, FILTER_VALIDATE_INT);
 		}
 
 		/**

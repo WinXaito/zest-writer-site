@@ -39,7 +39,8 @@
 			if(!$user)
 				ApiError::error(500);
 
-			$return[$content->getId()] = [
+			$return[] =[
+				'id' => $content->getId(),
 				'name' => $content->getName(),
 				'user' => [
 					'id' => $user->getId(),
@@ -56,7 +57,7 @@
 			];
 		}
 
-		ShowApi::show(empty($return) ? ['message' => 'No content founded'] : $return);
+		ShowApi::show(empty($return) ? ['message' => 'No content founded'] : [$obj => $return]);
 	}else{
 		//Get one specific contents
 		if(isset($_GET['id']) && !empty($_GET['id'])){
