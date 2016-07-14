@@ -8,4 +8,4 @@
 	define('PROTOCOL', $protocol);
 
 	define('ROOT', __DIR__);
-	define('URI', '');
+	define('URI', '/zest-writer-site/');

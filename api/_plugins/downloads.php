@@ -5,9 +5,9 @@
 	 */
 
 	require_once __DIR__.'/../init.php';
-	require_once __DIR__.'/../ApiDatabase.class.php';
-	require_once __DIR__.'/Plugin.class.php';
-	require_once __DIR__.'/../ApiError.php';
+	require_once APIROOT.'/class/ApiDatabase.class.php';
+	require_once APIROOT.'/class/Plugin.class.php';
+	require_once APIROOT.'/class/ApiError.class.php';
 
 	$db = new Database();
 	$apiDatabase = new ApiDatabase($db);

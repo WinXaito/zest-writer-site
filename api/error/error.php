@@ -5,6 +5,6 @@
 	 */
 
 	require_once __DIR__.'/../init.php';
-	require_once __DIR__.'/../ApiError.php';
+	require_once __DIR__.'/../ApiError.class.php';
 
 	ApiError::error($_GET['e']);

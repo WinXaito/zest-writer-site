@@ -54,6 +54,21 @@
 			$this->download_url = PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/download/'.$this->url_id;
 		}
 
+		public function setPluginArray($array){
+			$this->setPlugin(
+				$array['id'],
+				$array['user'],
+				$array['official'],
+				$array['validate'],
+				$array['name'],
+				$array['url_id'],
+				$array['description'],
+				$array['version'],
+				$array['downloads'],
+				$array['removed']
+			);
+		}
+
 		public function getArray(){
 			return [
 				'id' => filter_var($this->id, FILTER_VALIDATE_INT),

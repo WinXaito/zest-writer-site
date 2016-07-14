@@ -12,16 +12,20 @@
 		$result = $apiDatabase->get('SELECT * FROM plugins WHERE removed = 0', []);
 
 		while($data = $result->fetch()){
-			$return[$data['id']] = [
-				'name' => $data['name'],
-				'user' => $data['user'],
-				'official' => filter_var($data['official'], FILTER_VALIDATE_BOOLEAN),
-				'validate' => filter_var($data['validate'], FILTER_VALIDATE_BOOLEAN),
-				'description' => $data['description'],
-				'version' => $data['version'],
-				'downloads' => filter_var($data['downloads'], FILTER_VALIDATE_INT),
-				'url_id' => $data['url_id'],
-				'url' => PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/'.$data['url_id'],
+			$plugin = new Plugin();
+			$plugin->setPluginArray($data);
+
+			$return[$plugin->getId()] = [
+				'name' => $plugin->getName(),
+				'user' => $plugin->getUser(),
+				'official' => $plugin->getOfficial(),
+				'validate' => $plugin->getOfficial(),
+				'description' => $plugin->getDescription(),
+				'version' => $plugin->getVersion(),
+				'downloads' => $plugin->getDownloads(),
+				'url_id' => $plugin->getUrlId(),
+				'plugin_url' => PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/'.$data['url_id'],
+				'download_url' => $plugin->getDownloadUrl(),
 			];
 		}
 

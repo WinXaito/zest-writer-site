@@ -18,6 +18,11 @@
 
         RewriteRule ^theme/download/(\w+)$ _themes/downloads.php?id=$1 [L]
 
+    #User
+        RewriteRule ^users$ _users/users.php?list [L]
+        RewriteRule ^user/(\d+)$ _users/users.php?id=$1 [L]
+        RewriteRule ^user/(\w+)$ _users/users.php?name=$1 [L]
+
 #ErrorDocument
     ErrorDocument 400 /api/error/error.php?e=400
     ErrorDocument 401 /api/error/error.php?e=401
