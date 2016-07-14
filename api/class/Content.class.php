@@ -6,7 +6,11 @@
 
 	require_once __DIR__.'/../../config.php';
 
-	class Plugin{
+	class Content{
+		const Plugin = "plugins";
+		const Theme = "themes";
+
+		private $type;
 		private $id;
 		private $user;
 		private $official;
@@ -20,13 +24,13 @@
 		private $download_url;
 
 		/**
-		 * Plugin constructor.
+		 * Content constructor.
 		 */
 		public function __construct(){
 		}
 
 		/**
-		 * Plugin setter.
+		 * Content setter.
 		 *
 		 * @param $id
 		 * @param $user
@@ -39,7 +43,7 @@
 		 * @param $downloads
 		 * @param $removed
 		 */
-		public function setPlugin($id, $user, $official, $validate, $name, $url_id, $description, $version, $downloads, $removed){
+		public function setContent($id, $user, $official, $validate, $name, $url_id, $description, $version, $downloads, $removed){
 			$this->id = $id;
 			$this->user = $user;
 			$this->official = $official;
@@ -50,14 +54,14 @@
 			$this->version = $version;
 			$this->downloads = $downloads;
 			$this->removed = $removed;
-			$this->download_url = PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/plugin/download/'.$this->url_id;
+			$this->download_url = PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/'.$this->getTypeSingular().'/download/'.$this->url_id;
 		}
 
 		/**
 		 * @param $array
 		 */
-		public function setPluginArray($array){
-			$this->setPlugin(
+		public function setContentArray($array){
+			$this->setContent(
 				$array['id'],
 				$array['user'],
 				$array['official'],
@@ -91,10 +95,43 @@
 		}
 
 		/**
+		 * @param $content
 		 * @param $apiDatabase ApiDatabase
 		 */
-		public function increaseDownload($apiDatabase){
-			$apiDatabase->increaseDownload('plugins', $this->id);
+		public function increaseDownload($content, $apiDatabase){
+			$apiDatabase->increaseDownload($content, $this->id);
+		}
+
+		/**
+		 * @return mixed
+		 */
+		public function getTypePlural(){
+			if($this->type == Content::Plugin)
+				return "plugins";
+			else if($this->type == Content::Theme)
+				return "themes";
+			else
+				return null;
+		}
+
+		/**
+		 * @return mixed
+		 */
+		public function getTypeSingular(){
+			if($this->type == Content::Plugin)
+				return "plugin";
+			else if($this->type == Content::Theme)
+				return "theme";
+			else
+				return null;
+		}
+
+		/**
+		 * @param mixed $type
+		 */
+		public function setType($type){
+			$this->type = $type;
+			$this->download_url = PROTOCOL.$_SERVER['HTTP_HOST'].URI.'api/'.$this->getTypeSingular().'/download/'.$this->url_id;
 		}
 
 		/**

@@ -9,7 +9,7 @@
 	$return = [];
 	if(isset($_GET['list'])){
 		//Get list of all plugins
-		$result = $apiDatabase->get('SELECT * FROM users', []);
+		$result = $apiDatabase->query('SELECT * FROM users', []);
 
 		while($data = $result->fetch()){
 			$user = new User();

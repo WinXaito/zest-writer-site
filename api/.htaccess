@@ -5,18 +5,20 @@
     RewriteRule ^$ index.php [L]
 
     #Plugins
-        RewriteRule ^plugins$ _plugins/plugins.php?list [L]
-        RewriteRule ^plugin/(\w+)$ _plugins/plugins.php?id=$1 [L]
+        RewriteRule ^plugins$ contents/contents.php?list=true&content=plugin [L]
+        RewriteRule ^plugin/(\w+)$ contents/contents.php?id=$1&content=plugin [L]
 
-        RewriteRule ^plugin/download/(\w+).content _plugins/downloads.php?id=$1&type=content [L]
-        RewriteRule ^plugin/download/(\w+).data$ _plugins/downloads.php?id=$1&type=data [L]
-        RewriteRule ^plugin/download/(\w+)$ _plugins/downloads.php?id=$1&type=content [L]
+        RewriteRule ^plugin/download/(\w+).content downloads.php?obj=plugin&id=$1&type=content [L]
+        RewriteRule ^plugin/download/(\w+).data$ downloads.php?obj=plugin&id=$1&type=data [L]
+        RewriteRule ^plugin/download/(\w+)$ downloads.php?obj=plugin&id=$1&type=content [L]
 
     #Themes
-        RewriteRule ^themes$ _themes/themes.php?list [L]
-        RewriteRule ^theme/(\w+)$ _themes/themes.php?id=$1 [L]
+        RewriteRule ^themes$ contents/contents.php?list=true&content=theme [L]
+        RewriteRule ^theme/(\w+)$ contents/contents.php?id=$1&content=theme [L]
 
-        RewriteRule ^theme/download/(\w+)$ _themes/downloads.php?id=$1 [L]
+        RewriteRule ^theme/download/(\w+).content$ downloads.php?obj=theme&id=$1&type=content [L]
+        RewriteRule ^theme/download/(\w+).data$ downloads.php?obj=theme&id=$1&type=data [L]
+        RewriteRule ^theme/download/(\w+)$ downloads.php?obj=theme&id=$1&type=content [L]
 
     #User
         RewriteRule ^users$ _users/users.php?list [L]
