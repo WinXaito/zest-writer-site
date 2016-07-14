@@ -19,6 +19,7 @@
 			ApiError::error(404);
 
 		if($_GET['type'] == 'content'){
+			$plugin->increaseDownload($apiDatabase);
 			downloadFile( __DIR__.'/../../res/plugins/'.$plugin->getUrlId().'.content');
 		}else if($_GET['type'] == 'data'){
 			downloadFile( __DIR__.'/../../res/plugins/'.$plugin->getUrlId().'.data');

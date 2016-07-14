@@ -86,6 +86,13 @@
 		}
 
 		/**
+		 * @param $apiDatabase ApiDatabase
+		 */
+		public function increaseDownload($apiDatabase){
+			$apiDatabase->increaseDownload('plugins', $this->id);
+		}
+
+		/**
 		 * @return mixed
 		 */
 		public function getId(){

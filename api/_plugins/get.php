@@ -4,7 +4,7 @@
 	 * zest-writer-site Copyright© 2016 Kevin Vuilleumier
 	 */
 
-	require_once __DIR__.'/../../config.php';
+	require_once __DIR__.'/../init.php';
 
 	$return = [];
 	if(isset($_GET['list'])){
@@ -15,9 +15,15 @@
 			$plugin = new Plugin();
 			$plugin->setPluginArray($data);
 
+			$user = $apiDatabase->getUser($plugin->getUser());
+
+
 			$return[$plugin->getId()] = [
 				'name' => $plugin->getName(),
-				'user' => $plugin->getUser(),
+				'user' => [
+					'id' => $user->getId(),
+					'name' => $user->getName()
+				],
 				'official' => $plugin->getOfficial(),
 				'validate' => $plugin->getOfficial(),
 				'description' => $plugin->getDescription(),
@@ -34,11 +40,28 @@
 		//Get one specific _plugins
 		if(isset($_GET['id']) && !empty($_GET['id'])){
 			$plugin = $apiDatabase->getPlugin($_GET['id']);
+			$user = $apiDatabase->getUser($plugin->getUser());
 
 			if(!$plugin)
 				ApiError::error(404);
 
-			ShowApi::show($plugin->getArray());
+			ShowApi::show(
+				[
+					'id' => $plugin->getId(),
+					'name' => $plugin->getName(),
+					'user' => [
+						'id' => $user->getId(),
+						'name' => $user->getName()
+					],
+					'official' => $plugin->getOfficial(),
+					'validate' => $plugin->getOfficial(),
+					'description' => $plugin->getDescription(),
+					'version' => $plugin->getVersion(),
+					'downloads' => $plugin->getDownloads(),
+					'url_id' => $plugin->getUrlId(),
+					'download_url' => $plugin->getDownloadUrl(),
+				]
+			);
 		}else{
 			ApiError::error(400);
 		}

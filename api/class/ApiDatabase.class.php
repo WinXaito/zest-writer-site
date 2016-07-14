@@ -6,8 +6,8 @@
 
 	require_once __DIR__.'/../init.php';
 	require_once ROOT.'/models/Database.class.php';
-	require_once 'Plugin.class.php';
-	require_once 'User.class.php';
+	require_once __DIR__.'/Plugin.class.php';
+	require_once __DIR__.'/User.class.php';
 
 	class ApiDatabase{
 		private $db;
@@ -57,5 +57,13 @@
 				$result['removed']
 			);
 			return $plugin;
+		}
+
+		public function increaseDownload($table, $id){
+			$req = $this->get("UPDATE $table SET downloads = downloads + 1 WHERE id = ?", [$id]);
+
+			if(!$req){
+				ApiError::error(500);
+			}
 		}
 	}

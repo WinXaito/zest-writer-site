@@ -30,6 +30,9 @@
 				'download' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/download/{ID}.content',
 				'download_data' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'theme/download/{ID}.data',
 			],
+			'users' => [
+				'list_get' => $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'users',
+			],
 		]
 	];
 
